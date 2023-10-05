@@ -10,7 +10,9 @@ By using this class, we can store data at the point of analysis, such as data fr
 ![SpatialExperiment_Data_Structure](https://github.com/Pedramto89/Spatial-Transcriptomics-Data-Analysis/assets/85902042/a9848d3a-8cda-4708-b75b-2e9ac47cc791)
 
 
-
+#### 1- Load Data:
+#### 2- Quality Control
+#### 3- Normalization
 
 
 
