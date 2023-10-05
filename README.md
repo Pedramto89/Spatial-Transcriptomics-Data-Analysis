@@ -34,6 +34,24 @@ obj <- Load10X_Spatial(
 </pre>
 
 #### 2- Quality Control
+
+In subsequent, the features and counts of the sample can be illustrated to have a sense of the data and remove mitochoncdrial genes. 
+
+<pre>
+```R
+plot1 <- VlnPlot(obj, features = "nCount_Spatial", pt.size = 0.1) + NoLegend()
+plot2 <- SpatialFeaturePlot(obj, features = "nCount_Spatial") + theme(legend.position = "right")
+wrap_plots(plot1, plot2)
+
+
+# It is assumed that the case is a human sample. If it is a rat sample, use the commented code.
+  
+obj[["percent.mt"]] <- PercentageFeatureSet(obj, pattern = "^MT-")
+
+#obj[["percent.mt"]] <- PercentageFeatureSet(obj, pattern = "^Mt-")  # for rat
+```
+</pre>
+  
 #### 3- Normalization
 #### 4- Feature Selection
 #### 5- Dimensionality Reduction
