@@ -35,7 +35,7 @@ obj <- Load10X_Spatial(
 
 #### 2- Quality Control
 
-In subsequent, the features and counts of the sample can be illustrated to have a sense of the data and remove mitochoncdrial genes. 
+Following this, both the features and counts within the sample can be visualized to better understand the data and to eliminate mitochondrial genes.
 
 <pre>
 ```R
@@ -44,7 +44,7 @@ plot2 <- SpatialFeaturePlot(obj, features = "nCount_Spatial") + theme(legend.pos
 wrap_plots(plot1, plot2)
 
 
-# It is assumed that the case is a human sample. If it is a rat sample, use the commented code.
+# In the default setting, it's assumed that the sample is of human origin. To visualize the features and counts, this helps to get a grasp of the data and allows for the removal of mitochondrial genes. If dealing with a rat sample, uncomment and use the corresponding code.
   
 obj[["percent.mt"]] <- PercentageFeatureSet(obj, pattern = "^MT-")
 
