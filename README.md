@@ -13,6 +13,14 @@ By using this class, we can store data at the point of analysis, such as data fr
 #### 1- Load Data:
 #### 2- Quality Control
 #### 3- Normalization
+#### 4- Feature Selection
+#### 5- Dimensionality Reduction
+#### 6- Clustering
+#### 7- Spot Deconvolution
+#### 8- Differential Expression
+#### 9- Multiple Samples Integration
+#### 10- Spatial Enrichment Analysis: Evaluating cell-to-cell proximity
+#### 11- Using DEGs to create a machine laerning classifier
 
 
 
