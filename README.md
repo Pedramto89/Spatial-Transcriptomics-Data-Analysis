@@ -15,7 +15,7 @@ By using this class, we can store data at the point of analysis, such as data fr
 Spatial transcriptomics data can be analyzed using multiple software packages available on the benchmark, including Seurat, Scanpy, and Giotto. In this workflow, instructions are based on the Seurat package in R. 
 Initially, specifying the directory where the data resides is necessary for loading it via Seurat:
 
-'''
+,,,
 slice <- "PDAC-9137-A"
 root_dir <- "~/Documents/Visium/outs/" 
 setwd(root_dir)
@@ -30,7 +30,7 @@ obj <- Load10X_Spatial(
   image = NULL)
 
 obj
-'''
+,,,
 
 #### 2- Quality Control
 #### 3- Normalization
