@@ -7,6 +7,9 @@ In this process, the fundamental element of the analysis relies on the data form
 
 ![SpatialExperiment_Data_Structure](https://github.com/Pedramto89/Spatial-Transcriptomics-Data-Analysis/assets/85902042/a9848d3a-8cda-4708-b75b-2e9ac47cc791)
 
+By using this class, we can store data at the point of analysis, such as data from sequencing platforms (e.g. 10x Genomics Visium) at the point of analysis.
+
+
 
 ## Supplementary Material: Additional Resources, Credits, and Citations ##
 
