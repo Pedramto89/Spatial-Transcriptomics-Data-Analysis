@@ -10,7 +10,28 @@ By using this class, we can store data at the point of analysis, such as data fr
 ![SpatialExperiment_Data_Structure](https://github.com/Pedramto89/Spatial-Transcriptomics-Data-Analysis/assets/85902042/a9848d3a-8cda-4708-b75b-2e9ac47cc791)
 
 
-#### 1- Load Data:
+#### 1- Load Data
+
+Spatial transcriptomics data can be analyzed using multiple software packages available on the benchmark, including Seurat, Scanpy, and Giotto. In this workflow, instructions are based on the Seurat package in R. 
+Initially, specifying the directory where the data resides is necessary for loading it via Seurat:
+
+'''
+slice <- "PDAC-9137-A"
+root_dir <- "~/Documents/Visium/outs/" 
+setwd(root_dir)
+
+obj <- Load10X_Spatial(
+  data.dir = root_dir,
+  filename = "filtered_feature_bc_matrix.h5",
+  assay = "Spatial",
+  slice = "slice1",
+  filter.matrix = TRUE,
+  to.upper = FALSE,
+  image = NULL)
+
+obj
+'''
+
 #### 2- Quality Control
 #### 3- Normalization
 #### 4- Feature Selection
