@@ -9,7 +9,7 @@ By using this class, we can store data at the point of analysis, such as data fr
 
 ![SpatialExperiment_Data_Structure](https://github.com/Pedramto89/Spatial-Transcriptomics-Data-Analysis/assets/85902042/a9848d3a-8cda-4708-b75b-2e9ac47cc791)
 
-The whole pipeline and the codes will be available soon in a separate R Markdown file.
+The entire pipeline and codes, due to be available in a separate R Markdown file, are currently delayed and will be revealed after the method's publication, in compliance with data privacy considerations. This delay is attributed to the development of novel approaches in cell type annotation for spatial transcriptomics data. These approaches are expected to introduce new perspectives in manual annotation and the combined use of machine learning algorithms, and their details will be shared post-publication to maintain data confidentiality.
 
 #### 1- Load Data
 
@@ -65,7 +65,7 @@ In this spatial transcriptomics analysis, SCTransform is utilized as an advanced
 #### 8- Differential Expression
 #### 9- Multiple Samples Integration
 #### 10- Spatial Enrichment Analysis: Evaluating cell-to-cell proximity
-#### 11- Using DEGs to create a machine laerning classifier
+
 
 
 
