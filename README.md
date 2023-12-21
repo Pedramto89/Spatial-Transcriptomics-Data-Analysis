@@ -9,6 +9,7 @@ By using this class, we can store data at the point of analysis, such as data fr
 
 ![SpatialExperiment_Data_Structure](https://github.com/Pedramto89/Spatial-Transcriptomics-Data-Analysis/assets/85902042/a9848d3a-8cda-4708-b75b-2e9ac47cc791)
 
+The whole pipeline and the codes will be available soon in a separate R Markdown file.
 
 #### 1- Load Data
 
@@ -53,6 +54,10 @@ obj[["percent.mt"]] <- PercentageFeatureSet(obj, pattern = "^MT-")
 </pre>
   
 #### 3- Normalization
+
+
+
+
 #### 4- Feature Selection
 #### 5- Dimensionality Reduction
 #### 6- Clustering
