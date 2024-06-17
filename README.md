@@ -11,7 +11,7 @@ By using this class, we can store data at the point of analysis, such as data fr
 
 The entire pipeline and codes, due to be available in a separate R Markdown file, are currently delayed and will be revealed after the method's publication, in compliance with data privacy considerations. This delay is attributed to the development of novel approaches in cell type annotation for spatial transcriptomics data. These approaches are expected to introduce new perspectives in manual annotation and the combined use of machine learning algorithms, and their details will be shared post-publication to maintain data confidentiality.
 
-#### 1- Load Data
+## 1- Load Data
 
 Spatial transcriptomics data can be analyzed using multiple software packages available on the benchmark, including Seurat, Scanpy, and Giotto. In this workflow, instructions are based on the Seurat package in R. 
 Initially, specifying the directory where the data resides is necessary for loading it via Seurat:
@@ -34,7 +34,7 @@ obj <- Load10X_Spatial(
 ```
 </pre>
 
-#### 2- Quality Control
+## 2- Quality Control
 
 Following this, both the features and counts within the sample can be visualized to better understand the data and to eliminate mitochondrial genes.
 
@@ -55,7 +55,7 @@ obj[["percent.mt"]] <- PercentageFeatureSet(obj, pattern = "^MT-")
 
 
   
-#### 3- Normalization
+## 3- Normalization
 
 In this spatial transcriptomics analysis, SCTransform is utilized as an advanced normalization method within Seurat, recognized for its superior capabilities in managing technical noise and biological variability compared to the NormalizeData function. Through regularized negative binomial regression, technical variance is effectively stabilized across features. Not only is correction for sequencing depth achieved, but the influence of unwanted technical factors is also mitigated, while biological heterogeneity is preserved. With the application of SCTransform, more accurate feature selection and enhanced detection of subtle biological signals are facilitated, providing a robust foundation for subsequent analyses such as clustering and differential expression studies.
 
@@ -71,7 +71,7 @@ In the above code, it normalizes each sample using SCTransform and in the last l
 
 
 
-#### 4- Feature Selection
+## 4- Feature Selection
 Feature selection is a critical step in spatial transcriptomics analysis, especially when preparing to integrate data from multiple samples. This process involves identifying a set of features (genes) that are the most informative across the dataset, which can help in improving the accuracy of downstream analyses like clustering and dimensional reduction. In this workflow, we utilize `SelectIntegrationFeatures` from Seurat to choose a defined number of features that contribute most to the variability across the samples.
 
 ```R
@@ -83,7 +83,7 @@ The parameter `nfeatures = 2000` specifies that the top 2000 features with the h
 
 
 
-#### 5- Multiple Sample Integration:
+## 5- Multiple Sample Integration:
 Integrating multiple spatial transcriptomics samples is essential to correct for batch effects and align different datasets to a common space, facilitating comparative and joint analyses. This is achieved using a series of functions from Seurat to prepare the samples, find integration anchors, and finally integrate the data based on these anchors. The integration process uses the selected features from the `Feature Selection` step to ensure that only the most informative features are used to harmonize the datasets.
 
 ```R
@@ -94,15 +94,54 @@ samples_integrated <- IntegrateData(anchorset = anchors, normalization.method = 
 
 </pre>
 
-#### 6- Dimensionality Reduction
-#### 7- Clustering
-#### 8- Differential Expression
-#### 9- Spatial Enrichment Analysis: Evaluating cell-to-cell proximity
+## 6- Dimensionality Reduction
+Dimensionality reduction is employed to simplify the high-dimensional dataset into a more interpretable form while preserving essential information. 
+This analysis uses PCA to initially reduce the data, followed by UMAP and t-SNE to visualize the dataset in two dimensions, facilitating easier identification of patterns and groupings within the data. 
+The process is crucial for uncovering inherent structures and driving further analyses like clustering.
+
+```R
+samples_integrated <- RunPCA(samples_integrated, features = features)
+samples_integrated <- RunUMAP(samples_integrated, dims = 1:20)
+samples_integrated <- RunTSNE(samples_integrated, dims = 1:20)
+```
 
 
 
+#### To visualize the reduced dimensions:
+```R
+umap_plot <- DimPlot(samples_integrated, reduction = "umap", group.by = "cell.type.annot")
+print(umap_plot + ggtitle("UMAP Plot"))
+tsne_plot <- DimPlot(samples_integrated, reduction = "tsne", group.by = "cell.type.annot")
+print(tsne_plot + ggtitle("t-SNE Plot"))
+```
 
-## Supplementary Material: Additional Resources, Credits, and Citations ##
+#### To determine the optimal number of principal components, use the elbow plot:
+```R
+ElbowPlot(samples_integrated, ndims = 50)
+```
+
+
+## 7- Clustering
+Clustering groups cells based on their gene expression patterns, revealing biological distinctions across the dataset. 
+This process is crucial for identifying different cell populations or states within the spatial transcriptomics data. 
+We use the Louvain algorithm implemented in the `FindClusters` function of Seurat, which considers the previously computed PCA for determining cell similarity.
+
+```R
+samples_integrated <- FindClusters(samples_integrated, resolution = 0.1)
+cluster_plot <- DimPlot(samples_integrated, reduction = "umap", group.by = "seurat_clusters")
+print(cluster_plot + ggtitle("UMAP with Clusters"))
+```
+
+
+## 8- Differential Expression
+Differential expression analysis is conducted to identify genes that show statistically significant differences in expression between the clusters identified in the previous step. 
+This analysis helps in characterizing the biological differences between the cell states or types and can guide further biological interpretation and validation.
+
+```R
+# Find differentially expressed genes between clusters
+de_results <- FindMarkers(samples_integrated, ident.1 = 1, ident.2 = 2, min.pct = 0.25, only.pos = T)
+head(de_results)
+```
 
 
 
