@@ -83,12 +83,21 @@ The parameter `nfeatures = 2000` specifies that the top 2000 features with the h
 
 
 
-#### 5- Dimensionality Reduction
-#### 6- Clustering
-#### 7- Spot Deconvolution
+#### 5- Multiple Sample Integration:
+Integrating multiple spatial transcriptomics samples is essential to correct for batch effects and align different datasets to a common space, facilitating comparative and joint analyses. This is achieved using a series of functions from Seurat to prepare the samples, find integration anchors, and finally integrate the data based on these anchors. The integration process uses the selected features from the `Feature Selection` step to ensure that only the most informative features are used to harmonize the datasets.
+
+```R
+samples_list <- PrepSCTIntegration(object.list = samples_list, anchor.features = features)
+anchors <- FindIntegrationAnchors(object.list = samples_list, normalization.method = "SCT", anchor.features = features)
+samples_integrated <- IntegrateData(anchorset = anchors, normalization.method = "SCT")
+```
+
+</pre>
+
+#### 6- Dimensionality Reduction
+#### 7- Clustering
 #### 8- Differential Expression
-#### 9- Multiple Samples Integration
-#### 10- Spatial Enrichment Analysis: Evaluating cell-to-cell proximity
+#### 9- Spatial Enrichment Analysis: Evaluating cell-to-cell proximity
 
 
 
