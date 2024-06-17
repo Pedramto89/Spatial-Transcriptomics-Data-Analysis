@@ -57,6 +57,16 @@ obj[["percent.mt"]] <- PercentageFeatureSet(obj, pattern = "^MT-")
 
 In this spatial transcriptomics analysis, SCTransform is utilized as an advanced normalization method within Seurat, recognized for its superior capabilities in managing technical noise and biological variability compared to the NormalizeData function. Through regularized negative binomial regression, technical variance is effectively stabilized across features. Not only is correction for sequencing depth achieved, but the influence of unwanted technical factors is also mitigated, while biological heterogeneity is preserved. With the application of SCTransform, more accurate feature selection and enhanced detection of subtle biological signals are facilitated, providing a robust foundation for subsequent analyses such as clustering and differential expression studies.
 
+```R
+for (i in 1:length(samples_list)) {
+  # Normalize each sample using SCTransform
+  samples_list[[i]] <- SCTransform(samples_list[[i]], assay = "Spatial", verbose = FALSE)
+  # Add batch information as metadata
+  samples_list[[i]][["batch"]] <- names(samples_list)[i]
+}
+```
+</pre>
+
 
 #### 4- Feature Selection
 #### 5- Dimensionality Reduction
