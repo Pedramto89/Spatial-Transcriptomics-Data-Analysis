@@ -59,12 +59,12 @@ In this spatial transcriptomics analysis, SCTransform is utilized as an advanced
 
 ```R
 for (i in 1:length(samples_list)) {
-  # Normalize each sample using SCTransform
   samples_list[[i]] <- SCTransform(samples_list[[i]], assay = "Spatial", verbose = FALSE)
-  # Add batch information as metadata
   samples_list[[i]][["batch"]] <- names(samples_list)[i]
 }
 ```
+
+In the above code, it normalizes each sample using SCTransform and in the last line, it addes batch information as metadata.
 </pre>
 
 
