@@ -52,6 +52,8 @@ obj[["percent.mt"]] <- PercentageFeatureSet(obj, pattern = "^MT-")
 #obj[["percent.mt"]] <- PercentageFeatureSet(obj, pattern = "^Mt-")  # for rat
 ```
 </pre>
+
+
   
 #### 3- Normalization
 
@@ -68,16 +70,18 @@ In the above code, it normalizes each sample using SCTransform and in the last l
 </pre>
 
 
+
 #### 4- Feature Selection
 Feature selection is a critical step in spatial transcriptomics analysis, especially when preparing to integrate data from multiple samples. This process involves identifying a set of features (genes) that are the most informative across the dataset, which can help in improving the accuracy of downstream analyses like clustering and dimensional reduction. In this workflow, we utilize `SelectIntegrationFeatures` from Seurat to choose a defined number of features that contribute most to the variability across the samples.
 
 ```R
-# Selecting 2000 most informative features for integration
 features <- SelectIntegrationFeatures(object.list = samples_list, nfeatures = 2000)
 ```
-#The parameter `nfeatures = 2000` specifies that the top 2000 features with the highest variability are selected, which is a common practice to balance between capturing enough biological variability and computational efficiency.
+The parameter `nfeatures = 2000` specifies that the top 2000 features with the highest variability are selected, which is a common practice to balance between capturing enough biological variability and computational efficiency.
 
 </pre>
+
+
 
 #### 5- Dimensionality Reduction
 #### 6- Clustering
